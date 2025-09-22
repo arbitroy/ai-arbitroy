@@ -24,12 +24,6 @@ public class WebChatController {
         return "chat";
     }
 
-    
-    @GetMapping("/feedback")
-    public String feedback() {
-        return "feedback";
-    }
-    
 
     @PostMapping("/chat")
     @HxRequest
