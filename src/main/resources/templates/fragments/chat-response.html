@@ -1,0 +1,15 @@
+<!-- User Message -->
+<div class="flex justify-end mb-3" th:if="${userMessage}">
+    <div class="bg-blue-500 text-white px-3 py-2 rounded-lg max-w-sm">
+        <p th:text="${userMessage}"></p>
+        <div class="text-xs text-blue-100 mt-1">You</div>
+    </div>
+</div>
+
+<!-- AI Response -->
+<div class="flex justify-start mb-3" th:if="${aiResponse}">
+    <div class="bg-gray-200 text-gray-800 px-3 py-2 rounded-lg max-w-sm">
+        <p th:text="${aiResponse}" class="whitespace-pre-wrap"></p>
+        <div class="text-xs text-gray-500 mt-1">AI</div>
+    </div>
+</div>

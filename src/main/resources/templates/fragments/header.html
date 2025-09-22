@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <header th:fragment="header" class="bg-white shadow-sm">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-xl font-bold">
+                        <a th:href="@{/}" class="text-blue-600 hover:text-blue-800">AI-stuff</a>
+                    </h1>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <a th:href="@{/}" class="text-gray-600 hover:text-gray-800">Home</a>
+                    <a th:href="@{/feedback}" class="text-gray-600 hover:text-gray-800">Feedback</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+</body>
+</html>

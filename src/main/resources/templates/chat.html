@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}">
+
+<!-- Page title -->
+<head>
+    <title>AI Chat</title>
+</head>
+
+<!-- Page content (this replaces the content fragment in base.html) -->
+<div layout:fragment="content">
+    <div class="max-w-2xl mx-auto">
+        <h2 class="text-2xl font-bold text-center mb-6">AI Chat</h2>
+        
+        <div class="bg-white rounded-lg shadow p-4 mb-4" style="height: 400px;">
+            <div id="chat-messages" class="overflow-y-auto h-full space-y-3">
+                <div class="text-center text-gray-500 py-8">
+                    <p>Start a conversation!</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="loading-indicator" class="hidden text-center text-gray-500 mb-2">
+            <p>AI is thinking...</p>
+        </div>
+
+        <form hx-post="/chat" 
+              hx-target="#chat-messages" 
+              hx-swap="beforeend"
+              hx-on::before-request="showLoading()"
+              hx-on::after-request="hideLoading(); scrollToBottom(); this.reset()"
+              class="flex gap-2">
+            <input name="message" 
+                   type="text"
+                   placeholder="Type your message..." 
+                   required
+                   class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button type="submit" 
+                    class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                Send
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Page-specific scripts -->
+<th:block layout:fragment="scripts">
+    <script>
+        function showLoading() {
+            document.getElementById('loading-indicator').classList.remove('hidden');
+            clearWelcomeMessage();
+        }
+
+        function hideLoading() {
+            document.getElementById('loading-indicator').classList.add('hidden');
+        }
+
+        function scrollToBottom() {
+            const chatContainer = document.getElementById('chat-messages');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        let firstMessage = true;
+        function clearWelcomeMessage() {
+            if (firstMessage) {
+                document.getElementById('chat-messages').innerHTML = '';
+                firstMessage = false;
+            }
+        }
+    </script>
+</th:block>
+
+</html>
